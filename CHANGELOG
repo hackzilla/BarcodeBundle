@@ -1,0 +1,12 @@
+Version 0.4, 2011-08-15, Folke Ashberg <folke@ashberg.de>
+ * Bugfix: Correct Shell-Escaping calling genbarcode
+ * Use of preg functions instead of ereg
+ * Shipping Free-TTF file
+ * several fixups
+
+Version 0.3pl1, Folke Ashberg <folke@ashberg.de>
+ + support for magic_quotes_gpc set to off
+
+Version 0.3, Folke Ashberg <folke@ashberg.de>
+ + Windows compatible
+ + various code-fixes
