@@ -9,5 +9,6 @@
     ],
     "require": {
 
-    }
+    },
+    "target-dir": "Hackzilla/BarcodeBundle"
 }
