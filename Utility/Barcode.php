@@ -133,6 +133,26 @@ class Barcode
         $this->genbarcodeLocation = $location;
     }
 
+    public function setMode($mode)
+    {
+        $this->mode = $mode;
+    }
+
+    public function setScale($scale)
+    {
+        $this->scale = $scale;
+    }
+
+    public function setWidth($width)
+    {
+        $this->width = $width;
+    }
+
+    public function setHeight($height)
+    {
+        $this->height = $height;
+    }
+    
     /* CONFIGURATION ENDS HERE */
 
     //require("encode_bars.php"); /* build-in encoders */
