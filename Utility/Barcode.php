@@ -3,7 +3,6 @@
 namespace Hackzilla\BarcodeBundle\Utility;
 
 /*
-
  * (C) 2001,2002,2003,2004,2011 by Folke Ashberg <folke@ashberg.de>
  * (c) 2013 by Daniel Platt <github@ofdan.co.uk>
 
@@ -23,7 +22,6 @@ namespace Hackzilla\BarcodeBundle\Utility;
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
-
  */
 
 class Barcode
