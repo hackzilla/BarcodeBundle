@@ -24,6 +24,10 @@ namespace Hackzilla\BarcodeBundle\Utility;
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
+/**
+ * Barcode
+ * 
+ */
 class Barcode
 {
 
@@ -539,8 +543,15 @@ class Barcode
         return $bars;
     }
 
-    /* Encode Bars */
 
+    /**
+     * Generate the Ean Checksum
+     * Pass in first 12 digits
+     * 
+     * @param string $ean (without checksum)
+     * 
+     * @return int
+     */
     public function generateEanChecksum($ean)
     {
         $even = true;
