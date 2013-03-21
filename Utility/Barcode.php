@@ -577,7 +577,7 @@ class Barcode
                 $inf = explode(":", $v);
                 $fontsize = $scale * ($inf[1] / 1.8);
                 $fontheight = $total_y - ($fontsize / 2.7) + 2;
-                @\imagettftext($im, $fontsize, 0, $space['left'] + ($scale * $inf[0]) + 2, $fontheight, $col_text, $font_loc, $inf[2]);
+                \imagettftext($im, $fontsize, 0, $space['left'] + ($scale * $inf[0]) + 2, $fontheight, $col_text, $this->fontLocation(), $inf[2]);
             }
         }
 
