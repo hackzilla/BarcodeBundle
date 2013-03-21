@@ -1,6 +1,7 @@
 {
     "name": "hackzilla/barcode-bundle",
     "description": "Barcode Generator Bundle",
+    "license": "GPL-2.0+",
     "authors": [
         {
             "name": "Daniel Platt",
@@ -13,7 +14,7 @@
         }
     ],
     "require": {
-        "php":  ">=5.3.2",
+        "php":  ">=5.3.2"
     },
     "suggest": {
         "twig/twig": "to use outputHtml"
