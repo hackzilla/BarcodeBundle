@@ -470,16 +470,6 @@ class Barcode
         return $bars;
     }
 
-    /* output(code);
-     *
-     *  encodes and prints a barcode
-     *
-     *   return:
-     *    array[encoding] : the encoding which has been used
-     *    array[bars]     : the bars
-     *    array[text]     : text-positioning info
-     */
-
     /**
      * encodes and prints a barcode
      * 
@@ -584,6 +574,13 @@ class Barcode
         return $im;
     }
 
+    /**
+     * Save an image of the barcode to $filename or a generated filename
+     * 
+     * @param string $code
+     *
+     * @return string $filename
+     */
     public function save($code, $filename = false)
     {
         if(!$filename) {
@@ -631,17 +628,9 @@ class Barcode
         return (10 - ((3 * $esum + $osum) % 10)) % 10;
     }
 
-    /* encodeEan(code [, encoding])
-     *   encodes $ean with EAN-13 using builtin functions
-     *
-     *   return:
-     *    array[encoding] : the encoding which has been used (EAN-13)
-     *    array[bars]     : the bars
-     *    array[text]     : text-positioning info
-     */
-
     /**
-     * 
+     * encodes $ean with EAN-13 using builtin functions
+     *
      * @param type $ean
      * 
      * @return array
