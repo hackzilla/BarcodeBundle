@@ -450,7 +450,7 @@ class Barcode
         ) {
             /* use built-in EAN-Encoder */
             $bars = $this->encodeEan($code);
-        } else if (file_exists($genbarcode_loc)) {
+        } else if (file_exists($this->genbarcodeLocation())) {
             /* use genbarcode */
             $bars = $this->encodeGenbarcode($code);
         } else {
