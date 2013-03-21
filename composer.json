@@ -1,6 +1,6 @@
 {
     "name": "hackzilla/barcode-bundle",
-    "description": "Barcode Generator Bundle without dependancies",
+    "description": "Barcode Generator Bundle",
     "authors": [
         {
             "name": "Daniel Platt",
