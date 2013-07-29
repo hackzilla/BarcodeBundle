@@ -396,7 +396,6 @@ class Barcode
      */
     public function encodeGenbarcode($code)
     {
-	
         $encoding = \preg_replace("#[|\\\\]#", "_", $this->encoding());
         /* delete EAN-13 checksum */
         if (\preg_match("#^ean$#i", $encoding) && strlen($code) == 13) {
