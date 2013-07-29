@@ -2,10 +2,9 @@
 
 namespace Hackzilla\BarcodeBundle\Tests\Utility;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Hackzilla\BarcodeBundle\Utility\Barcode;
 
-class BarcodeTest extends WebTestCase
+class BarcodeTest extends \PHPUnit_Framework_TestCase
 {
     private $_object;
 
