@@ -67,3 +67,7 @@ public function registerBundles()
     );
 }
 ```
+
+### Step 3: Follow the examples
+
+- [Futher documentation](Resources/doc/index.md)
