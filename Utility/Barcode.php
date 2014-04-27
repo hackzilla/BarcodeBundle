@@ -30,13 +30,13 @@ namespace Hackzilla\BarcodeBundle\Utility;
  */
 class Barcode
 {
+
     private $twig;
     private $barColor;
     private $bgColor;
     private $textColor;
     private $fontLocation;
     private $genbarcodeLocation;
-
     private $encoding;
     private $mode;
     private $scale;
@@ -46,7 +46,6 @@ class Barcode
     const mode_png = 'png';
     const mode_jpeg = 'jpg';
     const mode_gif = 'gif';
-
     const encoding_any = 'ANY'; // choose best-fit (default)
     const encoding_ean = 'EAN'; // 8 or 13 EAN-Code
     const encoding_upc = 'UPC'; // 12-digit EAN
@@ -80,7 +79,7 @@ class Barcode
 
         $this->setEncoding(self::encoding_any);
         $this->setMode(self::mode_png);
-        
+
         $this->setScale(2);
         $this->setSpace();
     }
@@ -209,7 +208,7 @@ class Barcode
     {
         $size = 2 * $this->scale();
 
-        if($space === false || is_array($space)) {
+        if ($space === false || is_array($space)) {
             $this->space = array(
                 'top' => $size,
                 'left' => $size,
@@ -238,7 +237,7 @@ class Barcode
 
     public function setHeight($height)
     {
-        if($height < 1) {
+        if ($height < 1) {
             $height = 1;
         }
 
@@ -281,7 +280,7 @@ class Barcode
     {
         $bars = $this->encode($code);
         $bars = $bars['bars'];
-        
+
         $width = true;
         $xpos = $heigh2 = 0;
         $bar_line = "";
@@ -326,7 +325,7 @@ class Barcode
         $bars = $this->encode($code);
         $bars = $bars['bars'];
         $outBars = array();
-     
+
         $total_y = $this->height();
         $scale = $this->scale();
         $space = $this->space();
@@ -368,7 +367,7 @@ class Barcode
             $width = true;
         }
 
-        if(\is_object($this->twig)) {
+        if (\is_object($this->twig)) {
             $out = $this->twig->render('HackzillaBarcodeBundle:Barcode:layout.html.twig', array(
                 'height2' => $height2,
                 'space_top' => $space['top'],
@@ -380,7 +379,7 @@ class Barcode
         } else {
             $out = '<p>Twig not enabled in bundle</p>';
         }
-        
+
         return $out;
     }
 
@@ -583,7 +582,7 @@ class Barcode
      */
     public function save($code, $filename = false)
     {
-        if(!$filename) {
+        if (!$filename) {
             $filename = tmpfile();
         }
 
@@ -601,7 +600,6 @@ class Barcode
 
         return $filename;
     }
-
 
     /**
      * Generate the Ean Checksum
