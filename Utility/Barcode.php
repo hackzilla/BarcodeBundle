@@ -498,6 +498,13 @@ class Barcode
         }
     }
 
+    /**
+     * Build barcode
+     *
+     * @param string $code
+     *
+     * @return resource
+     */
     public function build($code)
     {
         $bars = $this->encode($code);
