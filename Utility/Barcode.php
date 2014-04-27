@@ -414,7 +414,6 @@ class Barcode
         $cmd = $this->genbarcodeLocation() . " "
                 . \escapeshellarg($code) . " "
                 . \escapeshellarg($encoding) . "";
-//print "'$cmd'<BR>\n";
         $fp = \popen($cmd, "r");
         if ($fp) {
             $bars = \fgets($fp, 1024);
