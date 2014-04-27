@@ -32,8 +32,8 @@ class Barcode
 {
     private $twig;
     private $barColor;
-    private $bgColour;
-    private $textColour;
+    private $bgColor;
+    private $textColor;
     private $fontLocation;
     private $genbarcodeLocation;
 
