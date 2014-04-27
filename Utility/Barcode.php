@@ -258,23 +258,18 @@ class Barcode
 
     /**
      * Outputs an image using libgd
-     * 
+     *
      * @param string $code
      */
     public function outputImage($code)
     {
-        $im = $this->returnImage($code);
-
         /* output the image */
         if ($this->mode() == self::mode_jpeg) {
-            \header("Content-Type: image/jpeg; name=\"barcode.jpg\"");
-            \imagejpeg($im);
+            $this->outputJpeg($code);
         } else if ($this->mode() == self::mode_gif) {
-            \header("Content-Type: image/gif; name=\"barcode.gif\"");
-            \imagegif($im);
+            $this->outputGif($code);
         } else {
-            \header("Content-Type: image/png; name=\"barcode.png\"");
-            \imagepng($im);
+            $this->outputPng($code);
         }
     }
 
