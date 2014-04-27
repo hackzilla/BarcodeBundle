@@ -279,6 +279,39 @@ class Barcode
     }
 
     /**
+     * Outputs png using libgd
+     *
+     * @param string $code
+     */
+    public function outputPng($code)
+    {
+        $im = $this->returnImage($code);
+        \imagepng($im);
+    }
+
+    /**
+     * Outputs jpeg using libgd
+     *
+     * @param string $code
+     */
+    public function outputJpeg($code)
+    {
+        $im = $this->returnImage($code);
+        \imagejpeg($im);
+    }
+
+    /**
+     * Outputs gif using libgd
+     *
+     * @param string $code
+     */
+    public function outputGif($code)
+    {
+        $im = $this->returnImage($code);
+        \imagegif($im);
+    }
+
+    /**
      *  Returns (!) a barcode as plain-text
      *  ATTENTION: this is very silly!
      * 
