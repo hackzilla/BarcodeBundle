@@ -600,7 +600,7 @@ class Barcode
             $filename = tmpfile();
         }
 
-        $im = $this->build($code, $encoding, $scale, $mode, $filename);
+        $im = $this->build($code);
         $mode = $this->mode();
 
         /* output the image */
