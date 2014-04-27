@@ -498,16 +498,12 @@ class Barcode
         }
     }
 
-    public function build($code, $filename = false)
+    public function build($code)
     {
         $bars = $this->encode($code);
 
         if (!$bars) {
             return;
-        }
-
-        if (!$filename) {
-            $filename = $code . '.' . $this->mode();
         }
 
         $text = $bars['text'];
