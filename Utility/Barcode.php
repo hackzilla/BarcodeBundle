@@ -247,13 +247,23 @@ class Barcode
     }
 
     /**
+     * Return an image using libgd
+     *
+     * @param string $code
+     */
+    public function returnImage($code)
+    {
+        return $this->build($code);
+    }
+
+    /**
      * Outputs an image using libgd
      * 
      * @param string $code
      */
     public function outputImage($code)
     {
-        $im = $this->build($code);
+        $im = $this->returnImage($code);
 
         /* output the image */
         if ($this->mode() == self::mode_jpeg) {
