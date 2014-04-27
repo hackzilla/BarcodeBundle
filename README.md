@@ -27,7 +27,7 @@ If you want to generate not only EAN-12/EAN-13/ISBN-Codes you have to install
 genbarcode, a small unix-commandline tool which uses GNU-Barcode.
 genbarcode is available http://www.ashberg.de/php-barcode , read genbarcodes
 README for installation.
-If you have installed genbarcode not to /usr/bin call set $barcode->setGenbarcodeLocation('/usr/local/bin/genbarcode')
+If you have installed genbarcode not to /usr/local/bin call set $barcode->setGenbarcodeLocation('/usr/local/bin/genbarcode')
 
 
 Installation
@@ -38,7 +38,7 @@ Add HackzillaBarcodeBundle in your composer.json:
 ```js
 {
     "require": {
-        "hackzilla/barcode-bundle": "*"
+        "hackzilla/barcode-bundle": "~1.0"
     }
 }
 ```
