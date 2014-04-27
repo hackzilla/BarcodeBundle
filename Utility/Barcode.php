@@ -438,6 +438,7 @@ class Barcode
         if (!$ret['text']) {
             return false;
         }
+
         return $ret;
     }
 
@@ -476,6 +477,7 @@ class Barcode
 
             return false;
         }
+
         return $bars;
     }
 
