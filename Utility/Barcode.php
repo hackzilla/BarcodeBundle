@@ -563,7 +563,6 @@ class Barcode
         $im = \imagecreate($total_x, $total_y);
 
         /* create two images */
-        $col_bg = \ImageColorAllocate($im, $this->bgColor(0), $this->bgColor(1), $this->bgColor(2));
         $col_bar = \ImageColorAllocate($im, $this->barColor(0), $this->barColor(1), $this->barColor(2));
         $col_text = \ImageColorAllocate($im, $this->textColor(0), $this->textColor(1), $this->textColor(2));
         $height = \round($total_y - ($scale * 10));
