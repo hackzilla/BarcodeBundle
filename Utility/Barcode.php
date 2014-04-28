@@ -315,33 +315,27 @@ class Barcode
      */
     public function outputText($code)
     {
-        $bars = $this->encode($code);
-        $bars = $bars['bars'];
+        $barContainer = $this->encode($code);
+        $bars = $barContainer['bars'];
+        $barLength = \strlen($bars);
 
         $width = true;
-        $xpos = $heigh2 = 0;
-        $bar_line = "";
+        $xpos = 0;
+        $bar_line = '';
 
-        for ($i = 0; $i < \strlen($bars); $i++) {
+        for ($i = 0; $i < $barLength; $i++) {
             $val = \strtolower($bars[$i]);
             if ($width) {
                 $xpos+=$val;
                 $width = false;
-                for ($a = 0; $a < $val; $a++) {
-                    $bar_line.="-";
-                }
+                $bar_line .= str_repeat('-', $val);
                 continue;
             }
             if (\preg_match("#[a-z]#", $val)) {
                 $val = \ord($val) - \ord('a') + 1;
-                $h = $heigh2;
-                for ($a = 0; $a < $val; $a++) {
-                    $bar_line.="I";
-                }
+                $bar_line .= str_repeat('I', $val);
             } else {
-                for ($a = 0; $a < $val; $a++) {
-                    $bar_line.="#";
-                }
+                $bar_line .= str_repeat('#', $val);
             }
             $xpos+=$val;
             $width = true;
@@ -359,8 +353,10 @@ class Barcode
      */
     public function outputHtml($code)
     {
-        $bars = $this->encode($code);
-        $bars = $bars['bars'];
+        $barContainer = $this->encode($code);
+        $bars = $barContainer['bars'];
+        $barLength = \strlen($bars);
+
         $outBars = array();
 
         $total_y = $this->height();
@@ -372,7 +368,8 @@ class Barcode
         $height2 = round($total_y) - $space['bottom'];
 
         $width = true;
-        for ($i = 0; $i < strlen($bars); $i++) {
+
+        for ($i = 0; $i < $barLength; $i++) {
             $val = strtolower($bars[$i]);
             if ($width) {
                 $w = $val * $scale;
@@ -438,30 +435,23 @@ class Barcode
             $code = \substr($code, 0, 12);
         }
         $code = \preg_replace("#[|\\\\]#", "_", $code);
-        $cmd = $this->genbarcodeLocation() . " "
-                . \escapeshellarg($code) . " "
-                . \escapeshellarg($encoding) . "";
-        $fp = \popen($cmd, "r");
-        if ($fp) {
-            $bars = \fgets($fp, 1024);
-            $text = \fgets($fp, 1024);
-            $encoding = \fgets($fp, 1024);
-            \pclose($fp);
-        } else {
+        $cmd = $this->genbarcodeLocation() . " " . \escapeshellarg($code) . " " . \escapeshellarg($encoding) . "";
+
+        $fp = \popen($cmd, 'r');
+
+        if (!$fp) {
             return false;
         }
+
         $ret = array(
-            "encoding" => \trim($encoding),
-            "bars" => \trim($bars),
-            "text" => \trim($text)
+            'bars' => \trim(\fgets($fp, 1024)),
+            'text' => \trim(\fgets($fp, 1024)),
+            'encoding' => \trim(\fgets($fp, 1024)),
         );
-        if (!$ret['encoding']) {
-            return false;
-        }
-        if (!$ret['bars']) {
-            return false;
-        }
-        if (!$ret['text']) {
+
+        \pclose($fp);
+
+        if (!$ret['encoding'] || !$ret['bars'] || !$ret['text']) {
             return false;
         }
 
