@@ -72,9 +72,6 @@ class Barcode
 
         $this->setFontLocation(dirname(__FILE__) . "/../Resources/font/FreeSansBold.ttf");
 
-        //$this->setGenbarcodeLocation("c:\winnt\genbarcode.exe");
-        $this->setGenbarcodeLocation("/usr/local/bin/genbarcode");
-
         $this->setHeight(120);
 
         $this->setEncoding(self::encoding_any);
