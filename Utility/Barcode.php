@@ -526,6 +526,7 @@ class Barcode
     public function build($code)
     {
         $bars = $this->encode($code);
+        $barsLength = \strlen($bars);
 
         if (!$bars) {
             return;
@@ -540,7 +541,7 @@ class Barcode
         /* count total width */
         $xpos = 0;
         $width = true;
-        for ($i = 0; $i < \strlen($bars); $i++) {
+        for ($i = 0; $i < $barsLength; $i++) {
             $val = \strtolower($bars[$i]);
             if ($width) {
                 $xpos+=$val * $scale;
@@ -571,7 +572,7 @@ class Barcode
 
         /* paint the bars */
         $width = true;
-        for ($i = 0; $i < \strlen($bars); $i++) {
+        for ($i = 0; $i < $barsLength; $i++) {
             $val = \strtolower($bars[$i]);
             if ($width) {
                 $xpos+=$val * $scale;
