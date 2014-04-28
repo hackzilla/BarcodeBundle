@@ -70,7 +70,8 @@ class Barcode
         $this->setBgColor(array(255, 255, 255));
         $this->setTextColor(array(0, 0, 0));
 
-        $this->setFontLocation(dirname(__FILE__) . "/../Resources/font/FreeSansBold.ttf");
+        $reflClass = new \ReflectionClass(get_class($this));
+        $this->setFontLocation(dirname($reflClass->getFileName()) . '/../Resources/font/FreeSansBold.ttf');
 
         $this->setHeight(120);
 
