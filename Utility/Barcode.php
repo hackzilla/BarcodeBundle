@@ -171,6 +171,8 @@ class Barcode
     {
         if (\is_string($location) && \strlen($location) > 0) {
             $this->genbarcodeLocation = $location;
+        } else {
+            $this->genbarcodeLocation = null;
         }
 
         return $this;
