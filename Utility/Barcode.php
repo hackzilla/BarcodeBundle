@@ -680,20 +680,39 @@ class Barcode
         if (\preg_match("#[^0-9]#i", $ean)) {
             return array("text" => "Invalid EAN-Code");
         }
+
         if ($encoding == "ISBN") {
             if (!\preg_match("#^978#", $ean))
                 $ean = "978" . $ean;
-        }
-        if (\preg_match("#^978#", $ean)) {
+        } else if (\preg_match("#^978#", $ean)) {
             $encoding = "ISBN";
         }
+
         if (\strlen($ean) < 12 || \strlen($ean) > 13) {
             return array("text" => "Invalid {$encoding} Code (must have 12/13 numbers)");
         }
 
-        $ean = \substr($ean, 0, 12);
-        $eansum = $this->generateEanChecksum($ean);
-        $ean .= $eansum;
+        $ean = \substr($ean, 0, 12) . $this->generateEanChecksum($ean);
+
+        return array(
+            "encoding" => $encoding,
+            "bars" => $this->createLine($guards, $digits, $mirror, $ean),
+            "text" => $this->createText($ean)
+        );
+    }
+
+    /**
+     * Create line
+     * 
+     * @param array $guards
+     * @param array $digits
+     * @param array $mirror
+     * @param string $ean
+     * 
+     * @return string
+     */
+    public function createLine($guards, $digits, $mirror, $ean)
+    {
         $line = $guards[0];
 
         for ($i = 1; $i < 13; $i++) {
@@ -709,15 +728,27 @@ class Barcode
         }
         $line .= $guards[2];
 
-        /* create text */
+        return $line;
+    }
+
+    /**
+     * Create barcode text
+     * @param string $ean
+     *
+     * @return string
+     */
+    public function createText($ean)
+    {
         $pos = 0;
         $text = "";
+
         for ($a = 0; $a < 13; $a++) {
             if ($a > 0) {
                 $text.=" ";
             }
 
             $text.="$pos:12:{$ean[$a]}";
+
             if ($a == 0) {
                 $pos+=12;
             } else if ($a == 6) {
@@ -727,11 +758,7 @@ class Barcode
             }
         }
 
-        return array(
-            "encoding" => $encoding,
-            "bars" => $line,
-            "text" => $text
-        );
+        return $text;
     }
 
 }
