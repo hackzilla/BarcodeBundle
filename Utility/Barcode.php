@@ -250,6 +250,7 @@ class Barcode
      * Return an image using libgd
      *
      * @param string $code
+     * @return resource
      */
     public function returnImage($code)
     {
