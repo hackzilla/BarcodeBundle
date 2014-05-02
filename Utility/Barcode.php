@@ -526,14 +526,19 @@ class Barcode
      */
     public function build($code)
     {
-        $barContainer = $this->encode($code);
-        $text = $barContainer['text'];
-        $bars = $barContainer['bars'];
-        $barsLength = \strlen($bars);
+        $bars = $this->encode($code);
 
         if (!$bars) {
             return;
         }
+
+        $text = $bars['text'];
+        $bars = $bars['bars'];
+        $barsLength = \strlen($bars);
+
+        $total_y = $this->height();
+        $scale = $this->scale();
+        $space = $this->space();
 
         /* count total width */
         $xpos = 0;
@@ -541,7 +546,7 @@ class Barcode
         for ($i = 0; $i < $barsLength; $i++) {
             $val = \strtolower($bars[$i]);
             if ($width) {
-                $xpos+=$val * $this->scale();
+                $xpos+=$val * $scale;
                 $width = false;
                 continue;
             }
@@ -549,21 +554,21 @@ class Barcode
                 /* tall bar */
                 $val = \ord($val) - \ord('a') + 1;
             }
-            $xpos+=$val * $this->scale();
+            $xpos+=$val * $scale;
             $width = true;
         }
 
         /* allocate the image */
-        $total_x = $xpos + $this->space()['right'] + $this->space()['right'];
-        $xpos = $this->space()['left'];
+        $total_x = $xpos + $space['right'] + $space['right'];
+        $xpos = $space['left'];
 
-        $im = \imagecreate($total_x, $this->height());
+        $im = \imagecreate($total_x, $total_y);
 
         /* create two images */
         $col_bar = \ImageColorAllocate($im, $this->barColor(0), $this->barColor(1), $this->barColor(2));
         $col_text = \ImageColorAllocate($im, $this->textColor(0), $this->textColor(1), $this->textColor(2));
-        $height = \round($this->height() - ($this->scale() * 10));
-        $height2 = \round($this->height() - $this->space()['bottom']);
+        $height = \round($total_y - ($scale * 10));
+        $height2 = \round($total_y - $space['bottom']);
 
 
         /* paint the bars */
@@ -571,7 +576,7 @@ class Barcode
         for ($i = 0; $i < $barsLength; $i++) {
             $val = \strtolower($bars[$i]);
             if ($width) {
-                $xpos+=$val * $this->scale();
+                $xpos+=$val * $scale;
                 $width = false;
                 continue;
             }
@@ -582,8 +587,8 @@ class Barcode
             } else {
                 $h = $height;
             }
-            \imagefilledrectangle($im, $xpos, $this->space()['top'], $xpos + ($val * $this->scale()) - 1, $h, $col_bar);
-            $xpos+=$val * $this->scale();
+            \imagefilledrectangle($im, $xpos, $space['top'], $xpos + ($val * $scale) - 1, $h, $col_bar);
+            $xpos+=$val * $scale;
             $width = true;
         }
 
@@ -593,9 +598,9 @@ class Barcode
         while (list($n, $v) = each($chars)) {
             if (trim($v)) {
                 $inf = explode(":", $v);
-                $fontsize = $this->scale() * ($inf[1] / 1.8);
-                $fontheight = $this->height() - ($fontsize / 2.7) + 2;
-                \imagettftext($im, $fontsize, 0, $this->space()['left'] + ($this->scale() * $inf[0]) + 2, $fontheight, $col_text, $this->fontLocation(), $inf[2]);
+                $fontsize = $scale * ($inf[1] / 1.8);
+                $fontheight = $total_y - ($fontsize / 2.7) + 2;
+                \imagettftext($im, $fontsize, 0, $space['left'] + ($scale * $inf[0]) + 2, $fontheight, $col_text, $this->fontLocation(), $inf[2]);
             }
         }
 
