@@ -595,7 +595,7 @@ class Barcode
         /* write out the text */
         $chars = \explode(" ", $text);
         \reset($chars);
-        while (list($n, $v) = each($chars)) {
+        foreach ($chars as $v) {
             if (trim($v)) {
                 $inf = explode(":", $v);
                 $fontsize = $scale * ($inf[1] / 1.8);
