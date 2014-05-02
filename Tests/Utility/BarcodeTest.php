@@ -136,4 +136,9 @@ class BarcodeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Invalid', \substr($bars['text'], 0, 7));
     }
 
+    public function testReturnImage()
+    {
+        $this->assertTrue(\is_resource($this->_object->returnImage('978085934063')));
+    }
+
 }
