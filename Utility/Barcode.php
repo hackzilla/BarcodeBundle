@@ -52,8 +52,8 @@ class Barcode
     const ENCODING_ISBN = 'ISBN'; // isbn numbers (still EAN-13)
     const ENCODING_39 = '39'; // code39
     const ENCODING_128 = '128'; // (a,b,c: autoselection)
-    const ENCODING_128c = '128C'; // (compact form for digits)
-    const ENCODING_128b = '128B'; // full printable ascii
+    const ENCODING_128C = '128C'; // (compact form for digits)
+    const ENCODING_128B = '128B'; // full printable ascii
     const ENCODING_I25 = 'I25'; // interleaved 2 of 5 (only digits)
     const ENCODING_128RAW = '128RAW'; // Raw code 128 (by Leonid A. Broukhis)
     const ENCODING_CBR = 'CBR'; // Codabar (by Leonid A. Broukhis)
