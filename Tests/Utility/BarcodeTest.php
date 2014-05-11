@@ -67,14 +67,14 @@ class BarcodeTest extends \PHPUnit_Framework_TestCase
 
     public function testEncoding()
     {
-        $this->_object->setEncoding(Barcode::encoding_any);
-        $this->assertEquals(Barcode::encoding_any, $this->_object->encoding());
+        $this->_object->setEncoding(Barcode::ENCODING_ANY);
+        $this->assertEquals(Barcode::ENCODING_ANY, $this->_object->encoding());
     }
 
     public function testMode()
     {
-        $this->_object->setMode(Barcode::mode_png);
-        $this->assertEquals(Barcode::mode_png, $this->_object->mode());
+        $this->_object->setMode(Barcode::MODE_PNG);
+        $this->assertEquals(Barcode::MODE_PNG, $this->_object->mode());
     }
 
     public function testScale()

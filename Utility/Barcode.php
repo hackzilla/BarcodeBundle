@@ -43,22 +43,22 @@ class Barcode
     private $height;
     private $space;
 
-    const mode_png = 'png';
-    const mode_jpeg = 'jpg';
-    const mode_gif = 'gif';
-    const encoding_any = 'ANY'; // choose best-fit (default)
-    const encoding_ean = 'EAN'; // 8 or 13 EAN-Code
-    const encoding_upc = 'UPC'; // 12-digit EAN
-    const encoding_isbn = 'ISBN'; // isbn numbers (still EAN-13)
-    const encoding_39 = '39'; // code39
-    const encoding_128 = '128'; // (a,b,c: autoselection)
-    const encoding_128c = '128C'; // (compact form for digits)
-    const encoding_128b = '128B'; // full printable ascii
-    const encoding_i25 = 'I25'; // interleaved 2 of 5 (only digits)
-    const encoding_128raw = '128RAW'; // Raw code 128 (by Leonid A. Broukhis)
-    const encoding_cbr = 'CBR'; // Codabar (by Leonid A. Broukhis)
-    const encoding_msi = 'MSI'; // MSI (by Leonid A. Broukhis)
-    const encoding_pls = 'PLS'; // Plessey (by Leonid A. Broukhis)
+    const MODE_PNG = 'png';
+    const MODE_JPEG = 'jpg';
+    const MODE_GIF = 'gif';
+    const ENCODING_ANY = 'ANY'; // choose best-fit (default)
+    const ENCODING_EAN = 'EAN'; // 8 or 13 EAN-Code
+    const ENCODING_UPC = 'UPC'; // 12-digit EAN
+    const ENCODING_ISBN = 'ISBN'; // isbn numbers (still EAN-13)
+    const ENCODING_39 = '39'; // code39
+    const ENCODING_128 = '128'; // (a,b,c: autoselection)
+    const ENCODING_128c = '128C'; // (compact form for digits)
+    const ENCODING_128b = '128B'; // full printable ascii
+    const ENCODING_I25 = 'I25'; // interleaved 2 of 5 (only digits)
+    const ENCODING_128RAW = '128RAW'; // Raw code 128 (by Leonid A. Broukhis)
+    const ENCODING_CBR = 'CBR'; // Codabar (by Leonid A. Broukhis)
+    const ENCODING_MSI = 'MSI'; // MSI (by Leonid A. Broukhis)
+    const ENCODING_PLS = 'PLS'; // Plessey (by Leonid A. Broukhis)
 
     public function __construct($container = null)
     {
@@ -75,8 +75,8 @@ class Barcode
 
         $this->setHeight(120);
 
-        $this->setEncoding(self::encoding_any);
-        $this->setMode(self::mode_png);
+        $this->setEncoding(self::ENCODING_ANY);
+        $this->setMode(self::MODE_PNG);
 
         $this->setScale(2);
         $this->setSpace();
@@ -265,9 +265,9 @@ class Barcode
     public function outputImage($code)
     {
         /* output the image */
-        if ($this->mode() == self::mode_jpeg) {
+        if ($this->mode() == self::MODE_JPEG) {
             $this->outputJpeg($code);
-        } else if ($this->mode() == self::mode_gif) {
+        } else if ($this->mode() == self::MODE_GIF) {
             $this->outputGif($code);
         } else {
             $this->outputPng($code);
