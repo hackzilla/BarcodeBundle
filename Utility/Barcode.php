@@ -531,7 +531,7 @@ class Barcode
         if (!$bars) {
             return;
         }
-
+var_dump($bars);
         $text = $bars['text'];
         $bars = $bars['bars'];
         $barsLength = \strlen($bars);
@@ -625,9 +625,9 @@ class Barcode
         $mode = $this->mode();
 
         /* output the image */
-        if ($mode == self::jpeg) {
+        if ($mode == self::MODE_JPEG) {
             imagejpeg($im, $filename);
-        } else if ($mode == self::gif) {
+        } else if ($mode == self::MODE_GIF) {
             imagegif($im, $filename);
         } else {
             imagepng($im, $filename);
