@@ -531,7 +531,7 @@ class Barcode
         if (!$bars) {
             return;
         }
-var_dump($bars);
+
         $text = $bars['text'];
         $bars = $bars['bars'];
         $barsLength = \strlen($bars);
