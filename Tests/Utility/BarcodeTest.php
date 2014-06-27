@@ -121,17 +121,17 @@ class BarcodeTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals(2, $this->_object->generateEanChecksum('500015941539'));
         $this->assertEquals(2, $this->_object->generateEanChecksum('978085934063'));
+        $this->assertEquals(5, $this->_object->generateEanChecksum('978178072167'));
 
         $this->assertNotEquals(7, $this->_object->generateEanChecksum('50001594159'));
     }
 
     public function testEncodeEan()
     {
-        $bars = $this->_object->encodeEan('978085934063');
+        $bars = $this->_object->encodeEan('9781780721675');
         $this->assertEquals('ISBN', $bars['encoding']);
-        $this->assertEquals('9a1a1312312111231213132131121a1a1141111323211111414112122a1a', $bars['bars']);
-        $this->assertEquals('0:12:9 12:12:7 19:12:8 26:12:0 33:12:8 40:12:5 47:12:9 59:12:3 66:12:4 73:12:0 80:12:6 87:12:3 94:12:2', $bars['text']);
-
+        $this->assertEquals('9a1a1312312112221312312132111a1a1131221222221111413121231a1a', $bars['bars']);
+        $this->assertEquals('0:12:9 12:12:7 19:12:8 26:12:1 33:12:7 40:12:8 47:12:0 59:12:7 66:12:2 73:12:1 80:12:6 87:12:7 94:12:5', $bars['text']);
         $bars = $this->_object->encodeEan('fail');
         $this->assertEquals('Invalid', \substr($bars['text'], 0, 7));
     }

@@ -695,7 +695,8 @@ var_dump($bars);
             return array("text" => "Invalid {$encoding} Code (must have 12/13 numbers)");
         }
 
-        $ean = \substr($ean, 0, 12) . $this->generateEanChecksum($ean);
+        $ean = \substr($ean, 0, 12);
+        $ean .=  $this->generateEanChecksum($ean);
 
         return array(
             "encoding" => $encoding,
