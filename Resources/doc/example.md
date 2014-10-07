@@ -18,7 +18,7 @@ class Default extends Controller
      */
     public function barcodeImageAction($code)
     {
-        $barcode = new Barcode();
+        $barcode = $this->container->get('hackzilla_barcode');
         $barcode->setMode(Barcode::mode_png);
 
         $headers = array(
@@ -34,8 +34,7 @@ class Default extends Controller
      */
     public function barcodeHtmlAction($code)
     {
-        $barcode = new Barcode();
-        $barcode->setTemplating($this->container->get('templating'));
+        $barcode = $this->container->get('hackzilla_barcode');
 
         $headers = array(
         );
@@ -48,7 +47,7 @@ class Default extends Controller
      */
     public function barcodeTextAction($code)
     {
-        $barcode = new Barcode();
+        $barcode = $this->container->get('hackzilla_barcode');
 
         $headers = array(
         );
@@ -105,4 +104,18 @@ class Default extends Controller
         return $contents;
     }
 }
+```
+
+Without Symfony
+
+```
+        $barcode = new Barcode();
+        $barcode->setMode(Barcode::mode_png);
+
+        $headers = array(
+            'Content-Type' => 'image/png',
+            'Content-Disposition' => 'inline; filename="'.$code.'.png"'
+        );
+
+        echo $barcode->outputImage($code);
 ```
