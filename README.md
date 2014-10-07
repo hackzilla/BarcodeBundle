@@ -29,6 +29,7 @@ genbarcode is available http://www.ashberg.de/php-barcode , read genbarcodes
 README for installation.
 If you have installed genbarcode not to /usr/local/bin call set $barcode->setGenbarcodeLocation('/usr/local/bin/genbarcode')
 
+Since 1.4 twig is passed using setTemplating() rather than the constructor.  See updated examples.
 
 Installation
 ------------

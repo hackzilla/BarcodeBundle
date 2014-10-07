@@ -34,7 +34,8 @@ class Default extends Controller
      */
     public function barcodeHtmlAction($code)
     {
-        $barcode = new Barcode($this->container);
+        $barcode = new Barcode();
+        $barcode->setTemplating($this->container->get('templating'));
 
         $headers = array(
         );
