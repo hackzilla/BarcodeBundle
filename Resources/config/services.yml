@@ -1,0 +1,8 @@
+parameters:
+    hackzilla_barcode.class: Hackzilla\BarcodeBundle\Utility\Barcode
+
+services:
+    hackzilla_barcode:
+        class: %hackzilla_barcode.class%
+        calls:
+          - [ setTemplating, [ @?templating ] ]
