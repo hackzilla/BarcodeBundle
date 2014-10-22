@@ -19,7 +19,7 @@ class Default extends Controller
     public function barcodeImageAction($code)
     {
         $barcode = $this->container->get('hackzilla_barcode');
-        $barcode->setMode(Barcode::mode_png);
+        $barcode->setMode(Barcode::MODE_PNG);
 
         $headers = array(
             'Content-Type' => 'image/png',
@@ -110,7 +110,7 @@ Without Symfony
 
 ```
         $barcode = new Barcode();
-        $barcode->setMode(Barcode::mode_png);
+        $barcode->setMode(Barcode::MODE_PNG);
 
         $headers = array(
             'Content-Type' => 'image/png',
