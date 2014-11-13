@@ -66,7 +66,7 @@ class Barcode
     public function __construct(ContainerInterface $container = null)
     {
         if ($container) {
-            $this->twig = $container;
+            $this->twig = $container->get('templating');;
         }
 
         $this->setBarColor(array(0, 0, 0));
