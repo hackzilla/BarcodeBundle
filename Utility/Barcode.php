@@ -32,7 +32,6 @@ use Hackzilla\BarcodeBundle\Exception\InvalidBarcodeFormatException;
  */
 class Barcode
 {
-    private $twig;
     private $barColor;
     private $bgColor;
     private $textColor;
