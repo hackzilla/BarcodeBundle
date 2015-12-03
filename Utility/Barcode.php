@@ -61,6 +61,9 @@ class Barcode
     const ENCODING_MSI = 'MSI'; // MSI (by Leonid A. Broukhis)
     const ENCODING_PLS = 'PLS'; // Plessey (by Leonid A. Broukhis)
 
+    const IMAGE_WHITE = 'data:image/gif;base64,R0lGODdhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs=';
+    const IMAGE_BLACK = 'data:image/gif;base64,R0lGODdhAQABAIAAAAAAAAAAACwAAAAAAQABAAACAkQBADs=';
+
     public function __construct()
     {
         $this->setBarColor(array(0, 0, 0));
@@ -400,20 +403,30 @@ class Barcode
             $width = true;
         }
 
-        if (\is_object($this->twig)) {
-            $out = $this->twig->render('HackzillaBarcodeBundle:Barcode:layout.html.twig', array(
-                'height2' => $height2,
-                'space_top' => $space['top'],
-                'space_bottom' => $space['bottom'],
-                'space_left' => $space['left'],
-                'space_right' => $space['right'],
-                'bars' => $outBars,
-            ));
-        } else {
-            $out = '<p>Twig not enabled in bundle</p>';
-        }
+        return $this->generateHtml($height2, $space, $outBars);
+    }
 
-        return $out;
+    private function generateHtml($height2, $space, $bars)
+    {
+        $html = '<table border=0 cellspacing=0 cellpadding=0 bgcolor="white">
+<tbody>
+    <tr><td><img src="'.self::IMAGE_WHITE.'" height="'.$space['top'].'" width="1" alt=" "></td></tr>
+    <tr><td>
+        <img src="'.self::IMAGE_WHITE.'" height="'.$height2.'" width="'.$space['left'].'" alt="#"/>
+';
+
+		foreach ($bars as $bar) {
+		    $html .= '<img src="'.($bar['type'] == 'white' ? self::IMAGE_WHITE : self::IMAGE_BLACK).'" height="'.$bar['height'].'" width="'.$bar['width'].'" align="top">'.PHP_EOL;
+		}
+
+        $html .= '        <img src="'.self::IMAGE_WHITE.'" height="'.$height2.'" width="'.$space['right'].'" />
+    </td></tr>
+    <tr><td><img src="'.self::IMAGE_WHITE.'" height="'.$space['bottom'].'" width="1"></td></tr>
+</tbody>
+</table>
+';
+
+        return $html; 
     }
 
     /**
