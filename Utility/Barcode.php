@@ -2,6 +2,8 @@
 
 namespace Hackzilla\BarcodeBundle\Utility;
 
+use Hackzilla\BarcodeBundle\Exception\InvalidBarcodeFormatException;
+
 /*
  * (C) 2001,2002,2003,2004,2011 by Folke Ashberg <folke@ashberg.de>
  * (c) 2013 by Daniel Platt <github@ofdan.co.uk>
@@ -676,7 +678,7 @@ class Barcode
         $encoding = $this->encoding();
 
         if (\preg_match("#[^0-9]#i", $ean)) {
-            return array("text" => "Invalid EAN-Code");
+            throw new InvalidBarcodeFormatException("Invalid EAN-Code");
         }
 
         if ($encoding == "ISBN") {
@@ -687,7 +689,7 @@ class Barcode
         }
 
         if (\strlen($ean) < 12 || \strlen($ean) > 13) {
-            return array("text" => "Invalid {$encoding} Code (must have 12/13 numbers)");
+            throw new InvalidBarcodeFormatException("Invalid {$encoding} Code (must have 12/13 numbers)");
         }
 
         $ean = \substr($ean, 0, 12);
