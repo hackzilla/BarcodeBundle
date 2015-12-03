@@ -2,9 +2,6 @@
 
 namespace Hackzilla\BarcodeBundle\Utility;
 
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\Templating\EngineInterface;
-
 /*
  * (C) 2001,2002,2003,2004,2011 by Folke Ashberg <folke@ashberg.de>
  * (c) 2013 by Daniel Platt <github@ofdan.co.uk>
@@ -62,12 +59,8 @@ class Barcode
     const ENCODING_MSI = 'MSI'; // MSI (by Leonid A. Broukhis)
     const ENCODING_PLS = 'PLS'; // Plessey (by Leonid A. Broukhis)
 
-    public function __construct(ContainerInterface $container = null)
+    public function __construct()
     {
-        if ($container) {
-            $this->twig = $container->get('templating');
-        }
-
         $this->setBarColor(array(0, 0, 0));
         $this->setBgColor(array(255, 255, 255));
         $this->setTextColor(array(0, 0, 0));
@@ -82,11 +75,6 @@ class Barcode
 
         $this->setScale(2);
         $this->setSpace();
-    }
-
-    public function setTemplating(EngineInterface $templating)
-    {
-        $this->twig = $templating;
     }
 
     public function barColor($id)
