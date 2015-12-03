@@ -33,7 +33,6 @@ use Symfony\Component\Templating\EngineInterface;
  */
 class Barcode
 {
-
     private $twig;
     private $barColor;
     private $bgColor;
@@ -772,5 +771,4 @@ class Barcode
 
         return $text;
     }
-
 }
