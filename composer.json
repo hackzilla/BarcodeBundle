@@ -17,9 +17,8 @@
         "php":  ">=5.3.2"
     },
     "autoload": {
-        "psr-0": {
-            "Hackzilla\\BarcodeBundle": ""
+        "psr-4": {
+            "Hackzilla\\BarcodeBundle\\": ""
         }
-    },
-    "target-dir": "Hackzilla/BarcodeBundle"
+    }
 }
