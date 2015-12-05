@@ -411,14 +411,14 @@ class Barcode
 <tbody>
     <tr><td><img src="'.self::IMAGE_WHITE.'" height="'.$space['top'].'" width="1" alt=" "></td></tr>
     <tr><td>
-        <img src="'.self::IMAGE_WHITE.'" height="'.$height2.'" width="'.$space['left'].'" alt="#"/>
+        <img src="'.self::IMAGE_WHITE.'" height="'.$height2.'" width="'.$space['left'].'" alt="#">
 ';
 
 		foreach ($bars as $bar) {
-		    $html .= '<img src="'.($bar['type'] == 'white' ? self::IMAGE_WHITE : self::IMAGE_BLACK).'" height="'.$bar['height'].'" width="'.$bar['width'].'" align="top">'.PHP_EOL;
+		    $html .= '<img src="'.($bar['type'] === 'white' ? self::IMAGE_WHITE : self::IMAGE_BLACK).'" height="'.$bar['height'].'" width="'.$bar['width'].'" align="top">';
 		}
 
-        $html .= '        <img src="'.self::IMAGE_WHITE.'" height="'.$height2.'" width="'.$space['right'].'" />
+        $html .= '<img src="'.self::IMAGE_WHITE.'" height="'.$height2.'" width="'.$space['right'].'">
     </td></tr>
     <tr><td><img src="'.self::IMAGE_WHITE.'" height="'.$space['bottom'].'" width="1"></td></tr>
 </tbody>
