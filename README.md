@@ -9,6 +9,7 @@ Fork of Folke Ashberg's PHP Barcode v0.4 [http://www.ashberg.de/php-barcode/]
 For usage and examples see: [Examples](Resources/doc/index.md)
 
 [![Build Status](https://travis-ci.org/hackzilla/BarcodeBundle.png?branch=master)](https://travis-ci.org/hackzilla/BarcodeBundle)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/50162040-3677-46d3-a99a-aea600924eb1/mini.png)](https://insight.sensiolabs.com/projects/50162040-3677-46d3-a99a-aea600924eb1)
 
 ### Requirements
 
