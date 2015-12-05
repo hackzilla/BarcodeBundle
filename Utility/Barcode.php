@@ -2,8 +2,7 @@
 
 namespace Hackzilla\BarcodeBundle\Utility;
 
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\Templating\EngineInterface;
+use Hackzilla\BarcodeBundle\Exception\InvalidBarcodeFormatException;
 
 /*
  * (C) 2001,2002,2003,2004,2011 by Folke Ashberg <folke@ashberg.de>
@@ -33,8 +32,6 @@ use Symfony\Component\Templating\EngineInterface;
  */
 class Barcode
 {
-
-    private $twig;
     private $barColor;
     private $bgColor;
     private $textColor;
@@ -63,12 +60,11 @@ class Barcode
     const ENCODING_MSI = 'MSI'; // MSI (by Leonid A. Broukhis)
     const ENCODING_PLS = 'PLS'; // Plessey (by Leonid A. Broukhis)
 
-    public function __construct(ContainerInterface $container = null)
-    {
-        if ($container) {
-            $this->twig = $container->get('templating');
-        }
+    const IMAGE_WHITE = 'data:image/gif;base64,R0lGODdhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs=';
+    const IMAGE_BLACK = 'data:image/gif;base64,R0lGODdhAQABAIAAAAAAAAAAACwAAAAAAQABAAACAkQBADs=';
 
+    public function __construct()
+    {
         $this->setBarColor(array(0, 0, 0));
         $this->setBgColor(array(255, 255, 255));
         $this->setTextColor(array(0, 0, 0));
@@ -83,11 +79,6 @@ class Barcode
 
         $this->setScale(2);
         $this->setSpace();
-    }
-
-    public function setTemplating(EngineInterface $templating)
-    {
-        $this->twig = $templating;
     }
 
     public function barColor($id)
@@ -411,20 +402,30 @@ class Barcode
             $width = true;
         }
 
-        if (\is_object($this->twig)) {
-            $out = $this->twig->render('HackzillaBarcodeBundle:Barcode:layout.html.twig', array(
-                'height2' => $height2,
-                'space_top' => $space['top'],
-                'space_bottom' => $space['bottom'],
-                'space_left' => $space['left'],
-                'space_right' => $space['right'],
-                'bars' => $outBars,
-            ));
-        } else {
-            $out = '<p>Twig not enabled in bundle</p>';
-        }
+        return $this->generateHtml($height2, $space, $outBars);
+    }
 
-        return $out;
+    private function generateHtml($height2, $space, $bars)
+    {
+        $html = '<table border=0 cellspacing=0 cellpadding=0 bgcolor="white">
+<tbody>
+    <tr><td><img src="'.self::IMAGE_WHITE.'" height="'.$space['top'].'" width="1" alt=" "></td></tr>
+    <tr><td>
+        <img src="'.self::IMAGE_WHITE.'" height="'.$height2.'" width="'.$space['left'].'" alt="#">
+';
+
+		foreach ($bars as $bar) {
+		    $html .= '<img src="'.($bar['type'] === 'white' ? self::IMAGE_WHITE : self::IMAGE_BLACK).'" height="'.$bar['height'].'" width="'.$bar['width'].'" align="top">';
+		}
+
+        $html .= '<img src="'.self::IMAGE_WHITE.'" height="'.$height2.'" width="'.$space['right'].'">
+    </td></tr>
+    <tr><td><img src="'.self::IMAGE_WHITE.'" height="'.$space['bottom'].'" width="1"></td></tr>
+</tbody>
+</table>
+';
+
+        return $html; 
     }
 
     /**
@@ -689,7 +690,7 @@ class Barcode
         $encoding = $this->encoding();
 
         if (\preg_match("#[^0-9]#i", $ean)) {
-            return array("text" => "Invalid EAN-Code");
+            throw new InvalidBarcodeFormatException("Invalid EAN-Code");
         }
 
         if ($encoding == "ISBN") {
@@ -700,7 +701,7 @@ class Barcode
         }
 
         if (\strlen($ean) < 12 || \strlen($ean) > 13) {
-            return array("text" => "Invalid {$encoding} Code (must have 12/13 numbers)");
+            throw new InvalidBarcodeFormatException("Invalid {$encoding} Code (must have 12/13 numbers)");
         }
 
         $ean = \substr($ean, 0, 12);
@@ -772,5 +773,4 @@ class Barcode
 
         return $text;
     }
-
 }

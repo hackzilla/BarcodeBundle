@@ -1,7 +1,7 @@
-Basic Example
-=============
+# Basic Symfony Examples
 
 ```php
+<?php
 
 // src/Acme/DemoBundle/Controller/Default.php
 
@@ -18,7 +18,7 @@ class Default extends Controller
      */
     public function barcodeImageAction($code)
     {
-        $barcode = $this->container->get('hackzilla_barcode');
+        $barcode = $this->get('hackzilla_barcode');
         $barcode->setMode(Barcode::MODE_PNG);
 
         $headers = array(
@@ -34,7 +34,7 @@ class Default extends Controller
      */
     public function barcodeHtmlAction($code)
     {
-        $barcode = $this->container->get('hackzilla_barcode');
+        $barcode = $this->get('hackzilla_barcode');
 
         $headers = array(
         );
@@ -47,7 +47,7 @@ class Default extends Controller
      */
     public function barcodeTextAction($code)
     {
-        $barcode = $this->container->get('hackzilla_barcode');
+        $barcode = $this->get('hackzilla_barcode');
 
         $headers = array(
         );
@@ -104,18 +104,4 @@ class Default extends Controller
         return $contents;
     }
 }
-```
-
-Without Symfony
-
-```
-        $barcode = new Barcode();
-        $barcode->setMode(Barcode::MODE_PNG);
-
-        $headers = array(
-            'Content-Type' => 'image/png',
-            'Content-Disposition' => 'inline; filename="'.$code.'.png"'
-        );
-
-        echo $barcode->outputImage($code);
 ```

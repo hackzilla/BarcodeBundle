@@ -4,5 +4,3 @@ parameters:
 services:
     hackzilla_barcode:
         class: %hackzilla_barcode.class%
-        calls:
-          - [ setTemplating, [ @?templating ] ]

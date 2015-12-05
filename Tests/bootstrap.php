@@ -1,3 +1,8 @@
 <?php
-
-require_once __dir__.'/../Utility/Barcode.php';
+if (is_file('vendor/autoload.php')) {
+    include 'vendor/autoload.php';
+} elseif (is_file($autoloadFile = __DIR__.'/../vendor/autoload.php')) {
+    require $autoloadFile;
+} else {
+    throw new \LogicException('Run "composer install" to create autoloader.');
+}
