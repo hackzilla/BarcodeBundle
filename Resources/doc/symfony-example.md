@@ -18,7 +18,7 @@ class Default extends Controller
      */
     public function barcodeImageAction($code)
     {
-        $barcode = $this->container->get('hackzilla_barcode');
+        $barcode = $this->get('hackzilla_barcode');
         $barcode->setMode(Barcode::MODE_PNG);
 
         $headers = array(
@@ -34,7 +34,7 @@ class Default extends Controller
      */
     public function barcodeHtmlAction($code)
     {
-        $barcode = $this->container->get('hackzilla_barcode');
+        $barcode = $this->get('hackzilla_barcode');
 
         $headers = array(
         );
@@ -47,7 +47,7 @@ class Default extends Controller
      */
     public function barcodeTextAction($code)
     {
-        $barcode = $this->container->get('hackzilla_barcode');
+        $barcode = $this->get('hackzilla_barcode');
 
         $headers = array(
         );
